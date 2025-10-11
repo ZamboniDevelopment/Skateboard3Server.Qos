@@ -17,6 +17,8 @@ public class QosController : ControllerBase
     private readonly QosConfig _config;
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+    private const string HardCodeIp = "95.217.209.57";
+
     public QosController(IOptions<QosConfig> config)
     {
         _config = config.Value;
@@ -38,7 +40,7 @@ public class QosController : ControllerBase
                     NumProbes = 0,
                     ProbeSize = 0,
                     QosPort = 17499, //TODO: maybe dont hardcode?
-                    QosIp = BitConverter.ToUInt32(IPAddress.Parse(_config.QosIp).GetAddressBytes()),
+                    QosIp = BitConverter.ToUInt32(IPAddress.Parse(HardCodeIp).GetAddressBytes()),
                     RequestId = 1,
                     RequestSecret = 0
                 };
@@ -48,7 +50,7 @@ public class QosController : ControllerBase
                     NumProbes = 10,
                     ProbeSize = 1200,
                     QosPort = 17499, //TODO: maybe dont hardcode?
-                    QosIp = BitConverter.ToUInt32(IPAddress.Parse(_config.QosIp).GetAddressBytes()),
+                    QosIp = BitConverter.ToUInt32(IPAddress.Parse(HardCodeIp).GetAddressBytes()),
                     RequestId = 1234, //TODO: generate and store?
                     RequestSecret = 5678 //TODO: generate and store?
                 };
@@ -66,7 +68,7 @@ public class QosController : ControllerBase
         //TODO pull from config
         return new FirewallResponse
         {
-            Ips = new List<long> { BitConverter.ToUInt32(IPAddress.Parse(_config.FirewallPrimaryIp).GetAddressBytes()), BitConverter.ToUInt32(IPAddress.Parse(_config.FirewallSecondaryIp).GetAddressBytes()) },
+            Ips = new List<long> { BitConverter.ToUInt32(IPAddress.Parse(HardCodeIp).GetAddressBytes()), BitConverter.ToUInt32(IPAddress.Parse(HardCodeIp).GetAddressBytes()) },
             NumInterfaces = 2, //TODO: we should return 2 because we need 
             Ports = new List<int> { 17500, 17501 }, //TODO do these need to be different?
             RequestId = 1234, //TODO: generate and store?

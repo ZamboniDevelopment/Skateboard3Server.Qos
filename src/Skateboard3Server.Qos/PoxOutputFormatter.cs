@@ -31,7 +31,9 @@ public class PoxOutputFormatter : OutputFormatter
 
     public PoxOutputFormatter()
     {
+        // MUST have application/xml to handle NHL's requests
         SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/xml").CopyAsReadOnly());
+        SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/xml").CopyAsReadOnly());
     }
 
     protected override bool CanWriteType(Type? type)

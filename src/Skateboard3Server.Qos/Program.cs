@@ -1,3 +1,4 @@
+using System.Net;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -40,7 +41,7 @@ public class Program
                 webBuilder.ConfigureKestrel(serverOptions =>
                     {
                         //qos servers [gosgvaprod-qos01, gosiadprod-qos01, gossjcprod-qos01] (HTTP)
-                        serverOptions.ListenAnyIP(17502);
+                        serverOptions.Listen(IPAddress.Any, 17502);
                     })
                     .UseStartup<Startup>();
             });
