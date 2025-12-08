@@ -18,7 +18,7 @@ public class QosController : ControllerBase
     private readonly QosConfig _config;
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    private static readonly string PublicIp = new HttpClient().GetStringAsync("https://checkip.amazonaws.com/").GetAwaiter().GetResult().Trim();
+    public static string PublicIp;
     
     public QosController(IOptions<QosConfig> config)
     {

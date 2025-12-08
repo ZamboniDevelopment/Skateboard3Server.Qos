@@ -1,10 +1,12 @@
 using System.Net;
+using System.Net.Http;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
+using Skateboard3Server.Qos.Controllers;
 
 namespace Skateboard3Server.Qos;
 
@@ -14,7 +16,7 @@ public class Program
     {
         //Setup NLog
         LogManager.Setup().LoadConfigurationFromAppSettings();
-
+        QosController.PublicIp = new HttpClient().GetStringAsync("https://checkip.amazonaws.com/").GetAwaiter().GetResult().Trim();
         try
         {
             CreateHostBuilder(args).Build().Run();
