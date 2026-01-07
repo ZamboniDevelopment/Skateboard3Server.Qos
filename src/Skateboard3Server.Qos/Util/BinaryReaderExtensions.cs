@@ -1,4 +1,5 @@
-﻿using System.Buffers.Binary;
+﻿using System;
+using System.Buffers.Binary;
 using System.IO;
 
 namespace Skateboard3Server.Qos.Util;
@@ -17,7 +18,17 @@ public static class BinaryReaderExtensions
 
     public static int ReadInt32Be(this BinaryReader reader)
     {
-        return BinaryPrimitives.ReadInt32BigEndian(reader.ReadBytes(4));
+        try
+        {
+            return BinaryPrimitives.ReadInt32BigEndian(reader.ReadBytes(4));
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
+            Console.WriteLine("Malformed bytes?");
+            return 0; 
+        }
     }
 
     public static uint ReadUInt32Be(this BinaryReader reader)
